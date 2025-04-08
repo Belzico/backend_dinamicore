@@ -1,0 +1,9 @@
+Se creó la tabla fintech.audit_log (archivo agregar_audit_table.sql) 
+para registrar todas las acciones relevantes realizadas dentro del 
+sistema financiero, como transacciones, pagos de créditos y operaciones 
+administrativas. Esta tabla almacena el tipo de acción (accion), la tabla 
+afectada, el identificador del registro modificado, el usuario responsable 
+(si aplica), una descripción detallada (detalle) y la fecha en que ocurrió. 
+Este mecanismo de auditoría permite realizar un seguimiento transparente y 
+confiable de todas las operaciones críticas, mejorando la trazabilidad y 
+facilitando la detección de comportamientos anómalos o fraudes.

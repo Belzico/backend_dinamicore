@@ -1,0 +1,7 @@
+Se desarrollaron dos consultas para generar el reporte de balance por usuario.
+La primera (archivo qwery1_1.sql) muestra el detalle de todas las wallets asociadas a cada usuario,
+ incluyendo su identificador, saldo y moneda. La segunda consulta (archivo qwery1_2.sql) agrupa esta 
+ información y calcula el balance total por usuario, sumando todas sus wallets, 
+ y ordena los resultados de mayor a menor saldo. Con ambas consultas se logra visualizar 
+ tanto el detalle como el resumen financiero de cada usuario dentro de la plataforma.
+

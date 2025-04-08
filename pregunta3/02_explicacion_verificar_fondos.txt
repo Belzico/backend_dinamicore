@@ -1,0 +1,12 @@
+La función verificar_fondos_suficientes (funcion_sin_fondos_1_2.sql) 
+actúa como un mecanismo preventivo
+para evitar operaciones inválidas en el sistema financiero. 
+Está diseñada para ser utilizada como un trigger que se ejecuta
+antes de insertar una transacción de tipo withdraw o transfer. 
+Esta función consulta el balance actual de la wallet origen y lanza 
+una excepción si el saldo disponible es inferior al monto de la 
+transacción solicitada. De esta manera, se garantiza que no se realicen 
+retiros o transferencias que dejen la wallet con saldo negativo, protegiendo
+la integridad del sistema. Este tipo de verificación a nivel de base 
+de datos refuerza la seguridad financiera al actuar como una última línea
+de defensa contra inconsistencias o vulnerabilidades en la lógica de negocio de la API.

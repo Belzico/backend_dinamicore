@@ -1,0 +1,10 @@
+Se desarrollaron cuatro consultas para generar un reporte de usuarios con
+mejor comportamiento crediticio. La primera (archivo qwery4_1.sql) muestra los créditos aprobados,
+junto con el total de pagos realizados y el monto abonado por cada usuario, 
+ordenados por mayor monto pagado. La segunda (archivo qwery4_2.sql) identifica los créditos que
+han sido saldados completamente, comparando lo pagado con el monto originalmente prestado.
+La tercera consulta (archivo qwery4_3.sql) indica cuántos usuarios tienen al menos un 
+crédito aprobado, y la cuarta (archivo qwery4_4.sql) determina cuántos de ellos han pagado 
+sus créditos en su totalidad. En conjunto, estas consultas permiten construir un
+ranking de usuarios responsables, evaluar el cumplimiento de pagos y generar
+reportes o dashboards de desempeño financiero.

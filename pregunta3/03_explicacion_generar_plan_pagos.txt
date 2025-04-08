@@ -1,0 +1,10 @@
+La función generar_plan_pagos (generar_plan_pagos_1_3.sql) permite automatizar 
+la creación del cronograma de pagos de un crédito aprobado. A partir del 
+credito_id, la función recupera el monto del préstamo y la tasa de interés, 
+valida que estos datos sean válidos y luego calcula una cuota fija mensual
+basada en un interés simple distribuido en cinco pagos. Cada cuota se
+inserta en la tabla credit_payments con una fecha de pago a 30 días 
+de intervalo. Adicionalmente, para asegurar la trazabilidad, la función 
+registra en la tabla audit_log un resumen de la operación realizada. 
+Este enfoque mejora la transparencia del sistema, evita errores manuales
+y establece una base sólida para el seguimiento de obligaciones crediticias en el tiempo.

@@ -1,0 +1,9 @@
+Se desarrollaron dos mecanismos para reforzar la seguridad financiera en las operaciones
+con wallets. La función procesar_transaccion (archivo procesar_transaccion_1_1.sql)
+permite realizar depósitos, retiros y transferencias verificando saldos, actualizando 
+balances y registrando las operaciones en las tablas transactions y audit_log, asegurando 
+la consistencia mediante bloqueos FOR UPDATE. Por otro lado, el trigger trig_check_funds 
+(archivo trigger_caso_sin_fondos_1_1.sql) impide, antes de insertar una transacción, que se ejecuten 
+retiros o transferencias si el balance no es suficiente, utilizando la función
+verificar_fondos_suficientes. Ambos mecanismos actúan de forma complementaria 
+para prevenir inconsistencias y garantizar transacciones seguras.

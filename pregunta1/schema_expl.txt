@@ -1,0 +1,73 @@
+┌────────────┐
+|   Users    |
+└────────────┘
+       1
+       |  (un usuario puede tener muchas wallets)
+       |
+       N
+┌────────────┐
+|  Wallets   |
+└────────────┘
+       1
+       |  (una wallet participa en muchas transacciones)
+       |
+       N
+┌────────────────┐
+|  Transactions  |
+└────────────────┘
+
+Además:
+
+┌────────────┐
+|   Users    |
+└────────────┘
+       1
+       |  (un usuario puede solicitar muchos créditos)
+       |
+       N
+┌───────────┐
+|  Credits  |
+└───────────┘
+       1
+       |  (un crédito puede tener varios pagos)
+       |
+       N
+┌────────────────┐
+| Credit_Payments|
+└────────────────┘
+
+
+Users (1) --- (N) Wallets
+Wallets (1) --- (N) Transactions
+Users (1) --- (N) Credits
+Credits (1) --- (N) Credit_Payments
+
+Justificacion del Diseno de la Base de Datos
+
+       Integridad y relaciones entre tablas
+       Las tablas fueron disenadas de manera que cada entidad tenga su propia responsabilidad y sea facil identificar a que usuario pertenece cada dato.
+
+              La tabla users almacena la informacion personal y crediticia, e incluye la contrasena hasheada para mayor seguridad.
+
+              La tabla wallets se vincula con users para llevar el control de los saldos de forma individual, permitiendo que un mismo usuario tenga varias wallets.
+
+              La tabla transactions registra todos los movimientos (depositos, retiros, transferencias) asociados a las wallets, lo que garantiza la trazabilidad de cada operacion.
+
+              Las tablas credits y credit_payments permiten gestionar el proceso de solicitud, aprobacion y pago de creditos, facilitando su seguimiento y ofreciendo un historial claro.
+
+       Mantenimiento de la seguridad
+       Se incluyo la columna hashed_password en la tabla users, ya que es fundamental no almacenar contrasenas en texto plano. De esta manera, en caso de que se obtenga acceso no autorizado a la base de datos, los hashes dificultan enormemente la exposicion de credenciales. A su vez, se utilizaron claves foraneas y restricciones (NOT NULL, UNIQUE) para garantizar la consistencia y evitar datos duplicados o incompletos.
+
+       Escalabilidad y futuro crecimiento
+       Al separar la logica de wallets y creditos en tablas distintas, el sistema puede adaptarse a nuevas necesidades sin afectar el diseno original. Por ejemplo, si en el futuro se implementan funcionalidades como prestamos, tarjetas virtuales u otros productos financieros, sera posible agregar nuevas tablas o relacionarlas con las ya existentes sin comprometer la estructura actual.
+
+       Facilidad de consulta y auditoria
+       Se incorporaron campos como created_at y updated_at para permitir el seguimiento de cada registro a lo largo del tiempo. Ademas, la separacion entre transactions y credit_payments en tablas independientes garantiza un historial claro de los movimientos financieros, lo cual es esencial para tareas de analisis y generacion de reportes.
+
+       Fiabilidad y minimizacion de errores
+       El uso de llaves foraneas y reglas de integridad referencial ayuda a mantener la coherencia de la informacion. Por ejemplo, las transacciones siempre estaran asociadas a una wallet valida, y no podran registrarse creditos sin un usuario vinculado. En caso de errores, PostgreSQL hara cumplir las relaciones y evitara la creacion de datos huerfanos.
+
+En resumen, este diseno responde a los requerimientos de una plataforma de wallet digital y creditos, manteniendo un equilibrio entre seguridad, escalabilidad y claridad en la implementacion.
+
+
+PS: LUEGO SE AGREGA EN EL EJ3 UNA NUEVA TABLA

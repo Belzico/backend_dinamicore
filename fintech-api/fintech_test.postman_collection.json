@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "ed085119-7bd1-4590-bf2c-dea5ffe4cd02",
+		"name": "fintech_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22439723"
+	},
+	"item": [
+		{
+			"name": "register_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Pedro2\",\r\n  \"last_name\": \"Picapiedras2\",\r\n  \"email\": \"ppicapiedras2@example.com\",\r\n  \"password\": \"supersecure123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign_in_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Guarda el token JWT en una variable global\r",
+							"const data = pm.response.json();\r",
+							"if (data.token) {\r",
+							"    pm.environment.set(\"jwt_token\", data.token);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ppicapiedras2@example.com\",\r\n  \"password\": \"supersecure123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign_in_user_for_admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Guarda el token JWT en una variable global\r",
+							"const data = pm.response.json();\r",
+							"if (data.token) {\r",
+							"    pm.environment.set(\"jwt_token\", data.token);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ppicapiedras2@example.com\",\r\n  \"password\": \"supersecure123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign_log_out_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Elimina el token JWT del entorno\r",
+							"pm.environment.unset(\"jwt_token\");\r",
+							"\r",
+							"// Confirmación visual en consola\r",
+							"console.log(\"JWT eliminado del entorno. Logout simulado en Postman.\");\r",
+							"\r",
+							"pm.test(\"Logout virtual realizado\", () => {\r",
+							"  pm.expect(true).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ppicapiedras@example.com\",\r\n  \"password\": \"supersecure123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear_wallet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"currency\": \"USD\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_wallets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_wallet_balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/wallets/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_balance_wallet_id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/wallets/3/history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"3",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deposit_balance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wallet_id\": 8,\r\n  \"amount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/deposit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "balance_transfer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wallet_id\": 8,\r\n  \"wallet_id_dest\": 1,\r\n  \"amount\": 25\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw_balance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wallet_id\": 8,\r\n  \"amount\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/transactions/withdraw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"transactions",
+						"withdraw"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "apply_credit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 5000,\r\n  \"interest_rate\": 5.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/credits/apply?Authorization=Bearer {{jwt_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"apply"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer {{jwt_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "view_credits",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/credits/my",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"my"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "approve_credit",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/credits/12/approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"12",
+						"approve"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deny_credit",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/credits/13/decline",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"13",
+						"decline"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "default_credit",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/credits/11/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"11",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dashboard_credits",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/credits/dashboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pay_credit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wallet_id\": 8,\r\n  \"amount\": 200.00\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/credits/12/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"credits",
+						"12",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "audit_logs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/audit-log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"audit-log"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

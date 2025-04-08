@@ -1,0 +1,8 @@
+Se construyó una consulta que analiza las transacciones agrupadas
+por mes y tipo (depósito, retiro, transferencia), mostrando el volumen
+total (SUM(amount)) y la cantidad de transacciones (COUNT(*)) por cada
+combinación. Luego, utilizando LAG, se compara 
+el total mensual con el del mes anterior, calculando tanto el crecimiento
+absoluto como el porcentaje de variación. Esto permite visualizar tendencias 
+mensuales y evaluar la evolución de cada tipo de transacción en el tiempo, 
+cumpliendo con el objetivo de mostrar el comportamiento financiero mes a mes.

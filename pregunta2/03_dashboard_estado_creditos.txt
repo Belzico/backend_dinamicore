@@ -1,0 +1,6 @@
+Se construyeron dos consultas para obtener un resumen del estado general de los créditos.
+La primera (archivo qwery3_1.sql) muestra la cantidad de créditos por estado (APPROVED, PENDING, DEFAULT, etc.) 
+y el monto total asociado a cada uno, permitiendo visualizar la distribución general de la cartera. 
+La segunda consulta (archivo qwery3_2.sql) calcula el porcentaje de morosidad, comparando cuántos créditos
+en DEFAULT hay sobre el total de créditos que fueron aprobados o están en mora. 
+Esto permite monitorear el nivel de riesgo de la plataforma y evaluar la salud del sistema de crédito.
